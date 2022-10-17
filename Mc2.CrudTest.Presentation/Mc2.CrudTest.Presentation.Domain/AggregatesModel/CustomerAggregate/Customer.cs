@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mc2.CrudTest.Presentation.Domain.Infrustructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
 {
-    public class Customer
+    public class Customer: Entity, IAggregateRoot
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
