@@ -104,9 +104,9 @@ namespace Mc2.CrudTest.FunctionalTests
             var secondContent = new StringContent(BuildSecondCustomer(), UTF8Encoding.UTF8, "application/json");
 
             var updateResponse = await server.CreateClient().PutAsync($"{_baseUrl}/1", secondContent);
-            
+
             updateResponse.EnsureSuccessStatusCode();
-            
+
         }
 
         [Fact]
@@ -158,8 +158,9 @@ namespace Mc2.CrudTest.FunctionalTests
             var bankAccountNumber = "0000-0000-0000-0000";
 
             //Act 
-            var customer = new CreateCustomerCommand
+            var customer = new UpdateCustomerCommand
             {
+                Id = 1,
                 Firstname = firstname,
                 Lastname = lastname,
                 DateOfBirth = dateOfBirth,

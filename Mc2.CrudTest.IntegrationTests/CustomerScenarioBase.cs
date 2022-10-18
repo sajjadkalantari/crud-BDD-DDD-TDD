@@ -38,8 +38,8 @@ namespace Mc2.CrudTest.FunctionalTests
                     context.Database.EnsureCreated();
                     context.Database.ExecuteSqlRaw(@"
                                             USE master;
-                                            ALTER DATABASE [CustomerTestDb] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-                                            DROP DATABASE [CustomerTestDb] ;
+                                            ALTER DATABASE [CustomerDb] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                                            DROP DATABASE [CustomerDb] ;
                                             ");
 
                     //context.Database.EnsureCreated();

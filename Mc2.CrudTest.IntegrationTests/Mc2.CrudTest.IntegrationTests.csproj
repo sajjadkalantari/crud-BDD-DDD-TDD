@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <None Update="xunit.runner.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.17" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
