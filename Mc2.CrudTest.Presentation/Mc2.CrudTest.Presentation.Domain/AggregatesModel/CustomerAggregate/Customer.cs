@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
 {
-    public class Customer: Entity, IAggregateRoot
+    public class Customer : Entity, IAggregateRoot
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
@@ -27,6 +27,11 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
             BankAccountNumber = ValidateBankAccount(bankAccountNumber) ? bankAccountNumber : throw new ArgumentException(nameof(bankAccountNumber));
         }
 
+        public Customer(int id, string firstname, string lastname, DateTime dateOfBirth, string phoneNumber, string email, string bankAccountNumber) : this(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber)
+        {
+            Id = id;            
+        }
+
         private bool ValidatePhonenumber(string phonenumber)
         {
             try
@@ -40,7 +45,7 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
             {
                 return false;
             }
-        
+
         }
 
         private bool ValidateEmail(string email)
