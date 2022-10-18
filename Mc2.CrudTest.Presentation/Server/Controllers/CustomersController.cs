@@ -1,8 +1,11 @@
 ﻿using Mc2.CrudTest.Presentation.Application.Commands;
 using Mc2.CrudTest.Presentation.Application.Dtos;
+using Mc2.CrudTest.Presentation.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Mc2.CrudTest.Presentation.Server.Controllers
@@ -12,9 +15,12 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public CustomersController(IMediator mediator)
+        private readonly ICustomerQueries _customerQueries;
+
+        public CustomersController(IMediator mediator, ICustomerQueries customerQueries)
         {
             _mediator = mediator;
+            _customerQueries = customerQueries;
         }
 
         [HttpPost]
@@ -28,6 +34,13 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
         {
             var deleteCommand = new DeleteCustomerCommand(id);
             return await _mediator.Send(deleteCommand);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(List<CustomerDTO>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<CustomerDTO>>> GetCustomersAsync()
+        {            
+            return await _customerQueries.GetCustomersAsync();
         }
     }
 }
