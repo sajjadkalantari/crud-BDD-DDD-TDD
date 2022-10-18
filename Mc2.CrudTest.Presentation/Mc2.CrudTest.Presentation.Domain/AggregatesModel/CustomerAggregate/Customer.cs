@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
 {
@@ -64,5 +63,4 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
         }
 
     }
-
 }
