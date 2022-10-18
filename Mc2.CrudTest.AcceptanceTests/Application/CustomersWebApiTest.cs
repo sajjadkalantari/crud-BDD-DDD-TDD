@@ -99,10 +99,10 @@ namespace Mc2.CrudTest.AcceptanceTests.Application
 
             //Act
             var customerController = new CustomersController(_mediatorMock.Object, _customerQueriesMock.Object);
-            var actionResult = await customerController.GetCustomersAsync();
+            var actionResult = await customerController.GetAllCustomersAsync();
 
             //Assert            
-            Assert.Equal(actionResult.Value, customers);
+            Assert.Equal(((OkObjectResult)actionResult.Result).Value, customers);
 
         }
     }
