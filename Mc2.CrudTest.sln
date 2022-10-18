@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31729.503
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Front", "Mc2.CrudTest.Presentation\Front\Mc2.CrudTest.Presentation.Front.csproj", "{4B62EAE3-1858-4833-9E36-EE77FADC2328}"
 EndProject
@@ -10,6 +10,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Shared", "Mc2.CrudTest.Presentation\Shared\Mc2.CrudTest.Shared.csproj", "{661369DC-0F78-4889-BA3B-639513A49789}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Server", "Mc2.CrudTest.Presentation\Server\Mc2.CrudTest.Presentation.Server.csproj", "{8D41010B-AEF1-4742-B7EC-6A5AE62C45FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Domain", "Mc2.CrudTest.Presentation\Mc2.CrudTest.Presentation.Domain\Mc2.CrudTest.Presentation.Domain.csproj", "{9AF89EEC-D304-429A-9212-6713CB03E321}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Application", "Mc2.CrudTest.Presentation\Mc2.CrudTest.Presentation.Application\Mc2.CrudTest.Presentation.Application.csproj", "{CC8434AE-7303-49BD-BDC9-437DCB7A1EB6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Infrustructure", "Mc2.CrudTest.Presentation\Mc2.CrudTest.Presentation.Infrustructure\Mc2.CrudTest.Presentation.Infrustructure.csproj", "{CF62162E-8587-4A3B-A006-EF16504E6078}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.IntegrationTests", "Mc2.CrudTest.IntegrationTests\Mc2.CrudTest.IntegrationTests.csproj", "{EC05C942-0ADF-4BE6-8FA1-783B8A234E63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{8D41010B-AEF1-4742-B7EC-6A5AE62C45FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D41010B-AEF1-4742-B7EC-6A5AE62C45FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D41010B-AEF1-4742-B7EC-6A5AE62C45FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AF89EEC-D304-429A-9212-6713CB03E321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF89EEC-D304-429A-9212-6713CB03E321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF89EEC-D304-429A-9212-6713CB03E321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AF89EEC-D304-429A-9212-6713CB03E321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8434AE-7303-49BD-BDC9-437DCB7A1EB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8434AE-7303-49BD-BDC9-437DCB7A1EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8434AE-7303-49BD-BDC9-437DCB7A1EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8434AE-7303-49BD-BDC9-437DCB7A1EB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF62162E-8587-4A3B-A006-EF16504E6078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF62162E-8587-4A3B-A006-EF16504E6078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF62162E-8587-4A3B-A006-EF16504E6078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF62162E-8587-4A3B-A006-EF16504E6078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC05C942-0ADF-4BE6-8FA1-783B8A234E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC05C942-0ADF-4BE6-8FA1-783B8A234E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC05C942-0ADF-4BE6-8FA1-783B8A234E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC05C942-0ADF-4BE6-8FA1-783B8A234E63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
