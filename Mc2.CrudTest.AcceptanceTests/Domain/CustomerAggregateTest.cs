@@ -3,7 +3,7 @@ using Mc2.CrudTest.Presentation.Domain.Events;
 using System;
 using Xunit;
 
-namespace Mc2.CrudTest.AcceptanceTests
+namespace Mc2.CrudTest.AcceptanceTests.Domain
 {
     public class CustomerAggregateTest
     {
@@ -34,7 +34,7 @@ namespace Mc2.CrudTest.AcceptanceTests
             var dateOfBirth = DateTime.UtcNow;
             var phoneNumber = "117 496 0123";
             var email = "test@test.com";
-            var bankAccountNumber = "0000-0000-0000-0000";            
+            var bankAccountNumber = "0000-0000-0000-0000";
 
             //Act - Assert
             Assert.Throws<ArgumentException>(() => new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber));
