@@ -9,6 +9,7 @@ namespace Mc2.CrudTest.Presentation.Application.Dtos
 {
     public class CustomerDTO
     {
+        public int Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -20,6 +21,7 @@ namespace Mc2.CrudTest.Presentation.Application.Dtos
         {
             return new CustomerDTO()
             {
+                Id = customer.Id,
                 Firstname = customer.Firstname,
                 Lastname = customer.Lastname,
                 DateOfBirth = customer.DateOfBirth,
