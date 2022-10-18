@@ -48,5 +48,22 @@ namespace Mc2.CrudTest.AcceptanceTests.Application
             Assert.Equal(actionResult.Value, customerDto);
 
         }
+
+        [Fact]
+        public async Task Delete_customer_success()
+        {
+            //Arrange
+            var customerId = 1;
+            _mediatorMock.Setup(x => x.Send(It.IsAny<DeleteCustomerCommand>(), default(CancellationToken)))
+                .Returns(Task.FromResult(customerId));
+
+            //Act
+            var customerController = new CustomersController(_mediatorMock.Object);
+            var actionResult = (await customerController.DeleteCustomerAsync(customerId));
+
+            //Assert            
+            Assert.Equal(actionResult.Value, customerId);
+
+        }
     }
 }

@@ -22,5 +22,12 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
         {
             return await _mediator.Send(createCustomerCommand);
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<int>> DeleteCustomerAsync(int id)
+        {
+            var deleteCommand = new DeleteCustomerCommand(id);
+            return await _mediator.Send(deleteCommand);
+        }
     }
 }
