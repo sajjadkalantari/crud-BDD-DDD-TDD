@@ -31,15 +31,22 @@ namespace Mc2.CrudTest.Presentation.Application.Commands
     public class CreateCustomerCommandHandler
     : IRequestHandler<CreateCustomerCommand, CustomerDTO>
     {
+        private readonly ICustomerRepository _customerRepository;
 
-        public CreateCustomerCommandHandler()
+        public CreateCustomerCommandHandler(ICustomerRepository customerRepository)
         {
+            _customerRepository = customerRepository;
         }
 
-        public Task<CustomerDTO> Handle(CreateCustomerCommand message, CancellationToken cancellationToken)
+        public async Task<CustomerDTO> Handle(CreateCustomerCommand message, CancellationToken cancellationToken)
         {
             var customer = CreateCustomerCommand.ToCustomer(message);
-            return Task.FromResult(CustomerDTO.FromCustomer(customer));
+            
+            var customerEntity = _customerRepository.Add(customer);
+
+            await _customerRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+
+            return CustomerDTO.FromCustomer(customerEntity);
         }
     }
 }
