@@ -23,10 +23,32 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
             _customerQueries = customerQueries;
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<CustomerDTO>> GetCustomerAsync(int id)
+        {
+            return await _customerQueries.GetCustomersByIdAsync(id);
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult<List<CustomerDTO>>> GetAllCustomersAsync()
+        {
+            var result =  await _customerQueries.GetCustomersAsync();
+            return Ok(result);
+        }
+
+
         [HttpPost]
         public async Task<ActionResult<CustomerDTO>> CreateCustomerAsync([FromBody] CreateCustomerCommand createCustomerCommand)
         {
             return await _mediator.Send(createCustomerCommand);
+        }
+
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<CustomerDTO>> UpdateCustomerAsync([FromBody] UpdateCustomerCommand command)
+        {
+            return await _mediator.Send(command);
         }
 
         [HttpDelete("{id:int}")]
@@ -36,11 +58,5 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
             return await _mediator.Send(deleteCommand);
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(List<CustomerDTO>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<List<CustomerDTO>>> GetCustomersAsync()
-        {            
-            return await _customerQueries.GetCustomersAsync();
-        }
     }
 }
