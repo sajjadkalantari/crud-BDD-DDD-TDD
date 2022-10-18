@@ -1,5 +1,6 @@
 ﻿using Mc2.CrudTest.Presentation.Application.Dtos;
 using Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate;
+using Mc2.CrudTest.Presentation.Infrustructure.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -24,15 +25,24 @@ namespace Mc2.CrudTest.Presentation.Application.Commands
 
     public class DeleteCommandHandler : IRequestHandler<DeleteCustomerCommand, int>
     {
+        private readonly ICustomerRepository _customerRepository;
 
-        public DeleteCommandHandler()
+        public DeleteCommandHandler(ICustomerRepository customerRepository)
         {
+            _customerRepository = customerRepository;
         }
 
-        public Task<int> Handle(DeleteCustomerCommand message, CancellationToken cancellationToken)
+        public async Task<int> Handle(DeleteCustomerCommand message, CancellationToken cancellationToken)
         {
-            //TODO: delete custommer by id
-            return Task.FromResult(message.Id);
+            var customer = await _customerRepository.FindByIdAsync(message.Id);
+            if (customer == null) throw new EntityNotFoundException(nameof(Customer));
+
+            _customerRepository.Delete(customer);
+            
+            await _customerRepository.UnitOfWork.SaveChangesAsync();
+
+            return message.Id;
         }
+
     }
 }
