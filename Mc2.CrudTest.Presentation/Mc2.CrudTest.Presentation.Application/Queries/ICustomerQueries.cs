@@ -36,9 +36,9 @@ namespace Mc2.CrudTest.Presentation.Application.Queries
             
             connection.Open();
 
-            var cusotmmers = await connection.QueryAsync<Customer>(@"SELECT * FROM customer.customers");
+            var cusotmmers = await connection.QueryAsync<CustomerDTO>(@"SELECT * FROM customer.customers");
 
-            return cusotmmers.Select(CustomerDTO.FromCustomer).ToList();
+            return cusotmmers.ToList();
 
         }
 
