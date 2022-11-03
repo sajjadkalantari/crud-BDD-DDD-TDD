@@ -1,6 +1,6 @@
 ﻿using Mc2.CrudTest.Presentation.Application.Dtos;
 using Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate;
-using Mc2.CrudTest.Presentation.Infrustructure.Exceptions;
+using Mc2.CrudTest.Shared.Exceptions;
 using MediatR;
 using System;
 using System.Threading;

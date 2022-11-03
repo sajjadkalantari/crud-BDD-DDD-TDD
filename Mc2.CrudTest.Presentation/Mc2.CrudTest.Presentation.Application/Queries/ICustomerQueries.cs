@@ -2,7 +2,7 @@
 using Mc2.CrudTest.Presentation.Application.Dtos;
 using Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate;
 using Mc2.CrudTest.Presentation.Infrustructure.ConfigModels;
-using Mc2.CrudTest.Presentation.Infrustructure.Exceptions;
+using Mc2.CrudTest.Shared.Exceptions;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 using System;
