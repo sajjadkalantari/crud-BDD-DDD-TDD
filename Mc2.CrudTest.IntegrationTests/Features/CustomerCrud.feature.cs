@@ -151,25 +151,135 @@ this.FeatureBackground();
  testRunner.Then("user can lookup all customers and filter by email of \"john@doe.com\" and get \"1\" r" +
                         "ecords", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "ID",
+                            "Firstname",
+                            "Lastname",
+                            "Email",
+                            "Phonenumber",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table3.AddRow(new string[] {
+                            "1",
+                            "Test",
+                            "Doe",
+                            "john@doe.com",
+                            "+989121234567",
+                            "01-JAN-2000",
+                            "NL91ABNA0417164300"});
 #line 18
+ testRunner.When("user creates a customer with following data", ((string)(null)), table3, "When ");
+#line hidden
+#line 21
+ testRunner.Then("user should get and error with code \"202\" and proper error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "ID",
+                            "Firstname",
+                            "Lastname",
+                            "Email",
+                            "Phonenumber",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table4.AddRow(new string[] {
+                            "2",
+                            "John",
+                            "Doe",
+                            "test@doe.com",
+                            "+989121234567",
+                            "01-JAN-2000",
+                            "NL91ABNA0417164300"});
+#line 22
+ testRunner.When("user creates a customer with following data", ((string)(null)), table4, "When ");
+#line hidden
+#line 25
+ testRunner.Then("user should get and error with code \"201\" and proper error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "ID",
+                            "Firstname",
+                            "Lastname",
+                            "Email",
+                            "Phonenumber",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table5.AddRow(new string[] {
+                            "1",
+                            "Test",
+                            "Doe",
+                            "test@doe.com",
+                            "+9891212",
+                            "01-JAN-2000",
+                            "NL91ABNA0417164300"});
+#line 26
+ testRunner.When("user creates a customer with following data", ((string)(null)), table5, "When ");
+#line hidden
+#line 29
+ testRunner.Then("user should get and error with code \"101\" and proper error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "ID",
+                            "Firstname",
+                            "Lastname",
+                            "Email",
+                            "Phonenumber",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table6.AddRow(new string[] {
+                            "1",
+                            "Test",
+                            "Doe",
+                            "test@",
+                            "+989121234567",
+                            "01-JAN-2000",
+                            "NL91ABNA0417164300"});
+#line 30
+ testRunner.When("user creates a customer with following data", ((string)(null)), table6, "When ");
+#line hidden
+#line 33
+ testRunner.Then("user should get and error with code \"102\" and proper error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "ID",
+                            "Firstname",
+                            "Lastname",
+                            "Email",
+                            "Phonenumber",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table7.AddRow(new string[] {
+                            "1",
+                            "Test",
+                            "Doe",
+                            "test@doe.com",
+                            "+989121234567",
+                            "01-JAN-2000",
+                            "NL0417164300ASD"});
+#line 34
+ testRunner.When("user creates a customer with following data", ((string)(null)), table7, "When ");
+#line hidden
+#line 37
+ testRunner.Then("user should get and error with code \"103\" and proper error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 38
  testRunner.When("user edit customer with new email of \"new@gmail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 19
+#line 39
  testRunner.Then("user can lookup all customers and filter by email of \"john@doe.com\" and get \"0\" r" +
                         "ecords", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 20
+#line 40
  testRunner.And("user can lookup all customers and filter by email of \"new@gmail.com\" and get \"1\" " +
                         "records", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 21
+#line 41
  testRunner.When("user delete customer by Email of \"new@gmail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 22
+#line 42
  testRunner.Then("user can lookup all customers and filter by email of \"john@doe.com\" and get \"0\" r" +
                         "ecords", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 23
+#line 43
  testRunner.And("user can lookup all customers and filter by email of \"new@gmail.com\" and get \"0\" " +
                         "records", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

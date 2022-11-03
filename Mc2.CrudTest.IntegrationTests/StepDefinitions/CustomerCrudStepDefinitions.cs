@@ -1,6 +1,7 @@
 using Mc2.CrudTest.IntegrationTests.Api;
 using Mc2.CrudTest.Presentation.Application.Commands;
 using Mc2.CrudTest.Presentation.Application.Dtos;
+using Mc2.CrudTest.Shared.Exceptions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,8 +39,14 @@ namespace Mc2.CrudTest.IntegrationTests.StepDefinitions
                 DateOfBirth = DateTime.Parse(table.Rows[0]["DateOfBirth"]),
                 BankAccountNumber = table.Rows[0]["BankAccountNumber"]
             };
-
-            _scenarioContext["customer"] = await _customerApi.CreateCustomerAsync(customer);
+            try
+            {
+                _scenarioContext["customer"] = await _customerApi.CreateCustomerAsync(customer);
+            }
+            catch (CustomSystemException e)
+            {
+                _scenarioContext["customer-error"] = e;
+            }
         }
 
         [Then(@"user can lookup all customers and filter by email of ""([^""]*)"" and get ""([^""]*)"" records")]
@@ -77,5 +84,16 @@ namespace Mc2.CrudTest.IntegrationTests.StepDefinitions
             var customer = customers.Where(x => x.Email == p0).First();
             await _customerApi.DeleteCustomersAsync(customer.Id);
         }
+
+        [Then(@"user should get and error with code ""([^""]*)"" and proper error message")]
+        public async Task ThenUserShouldGetAndErrorWithCodeAndMessage(string p0)
+        {
+            var customerCreationError = (CustomSystemException)_scenarioContext["customer-error"];
+            var errorMessage = ((Table)_scenarioContext["ErrorCodes"]).Rows.First(m => m["Code"] == p0)["Description"];
+
+            Assert.Equal(p0, customerCreationError.Code.ToString());
+            Assert.Equal(errorMessage, customerCreationError.Message);
+        }
+
     }
 }
