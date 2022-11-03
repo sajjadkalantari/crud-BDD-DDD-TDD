@@ -4,14 +4,16 @@ using Mc2.CrudTest.Presentation.Infrustructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Mc2.CrudTest.Presentation.Infrustructure.Migrations
 {
     [DbContext(typeof(CustomerContext))]
-    partial class CustomerContextModelSnapshot : ModelSnapshot
+    [Migration("20221103094703_UpdatePhoneNumberTypeToValueObject")]
+    partial class UpdatePhoneNumberTypeToValueObject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,18 @@ namespace Mc2.CrudTest.Presentation.Infrustructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("BankAccountNumber")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Firstname")
                         .IsRequired()
@@ -41,6 +53,9 @@ namespace Mc2.CrudTest.Presentation.Infrustructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("DateOfBirth", "Firstname", "Lastname")
                         .IsUnique();
 
@@ -49,52 +64,6 @@ namespace Mc2.CrudTest.Presentation.Infrustructure.Migrations
 
             modelBuilder.Entity("Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate.Customer", b =>
                 {
-                    b.OwnsOne("Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate.BankAccountNumberValueObject", "BankAccountNumber", b1 =>
-                        {
-                            b1.Property<int>("CustomerId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("BankAccountNumber")
-                                .IsRequired()
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("BankAccountNumber");
-
-                            b1.HasKey("CustomerId");
-
-                            b1.ToTable("customers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
-
-                    b.OwnsOne("Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate.EmailValueObject", "Email", b1 =>
-                        {
-                            b1.Property<int>("CustomerId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Email")
-                                .IsRequired()
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("Email");
-
-                            b1.HasKey("CustomerId");
-
-                            b1.HasIndex("Email")
-                                .IsUnique()
-                                .HasFilter("[Email] IS NOT NULL");
-
-                            b1.ToTable("customers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
-
                     b.OwnsOne("Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate.PhoneNumberValueObject", "PhoneNumber", b1 =>
                         {
                             b1.Property<int>("CustomerId")
@@ -113,10 +82,6 @@ namespace Mc2.CrudTest.Presentation.Infrustructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("CustomerId");
                         });
-
-                    b.Navigation("BankAccountNumber");
-
-                    b.Navigation("Email");
 
                     b.Navigation("PhoneNumber");
                 });
