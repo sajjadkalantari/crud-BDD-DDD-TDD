@@ -1,12 +1,14 @@
 ﻿
 using Mc2.CrudTest.Presentation.Application.Commands;
 using Mc2.CrudTest.Presentation.Application.Dtos;
+using Mc2.CrudTest.Shared.Exceptions;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Mc2.CrudTest.IntegrationTests.Api
@@ -27,14 +29,22 @@ namespace Mc2.CrudTest.IntegrationTests.Api
         public async Task<CustomerDTO> CreateCustomerAsync(CreateCustomerCommand model)
         {
             var request = new RestRequest(_baseUrl).AddBody(model);
-            var response =  await _client.PostAsync<CustomerDTO>(request);
-            return response;
+
+            var response = await _client.ExecutePostAsync<CustomerDTO>(request);
+
+            if (!response.IsSuccessful)
+            {
+                var result = JsonSerializer.Deserialize<ResponseDTO>(response.Content);
+                throw new CustomSystemException(result.Code, result.Description);
+            }
+
+            return response.Data;
         }
-        
+
         public async Task<CustomerDTO> UpdateCustomerAsync(UpdateCustomerCommand model)
         {
             var request = new RestRequest($"{_baseUrl}/{model.Id}").AddBody(model);
-            var response =  await _client.PutAsync<CustomerDTO>(request);
+            var response = await _client.PutAsync<CustomerDTO>(request);
             return response;
         }
 
