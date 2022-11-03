@@ -1,4 +1,7 @@
-﻿using Mc2.CrudTest.Presentation.Domain.Infrustructure;
+﻿using IbanNet;
+using Mc2.CrudTest.Presentation.Domain.Infrustructure;
+using Mc2.CrudTest.Shared;
+using Mc2.CrudTest.Shared.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +25,9 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
             Firstname = !string.IsNullOrEmpty(firstname) ? firstname : throw new ArgumentNullException(nameof(firstname));
             Lastname = !string.IsNullOrEmpty(lastname) ? lastname : throw new ArgumentNullException(nameof(lastname));
             DateOfBirth = dateOfBirth;
-            PhoneNumber = ValidatePhonenumber(phoneNumber) ? phoneNumber : throw new ArgumentException(nameof(phoneNumber));
-            Email = ValidateEmail(email) ? email : throw new ArgumentException(nameof(email));
-            BankAccountNumber = ValidateBankAccount(bankAccountNumber) ? bankAccountNumber : throw new ArgumentException(nameof(bankAccountNumber));
+            PhoneNumber = ValidatePhonenumber(phoneNumber) ? phoneNumber : throw new CustomSystemException(Constants.ErrorCodes.InvalidMobileNumber, "invalid mobile number");
+            Email = ValidateEmail(email) ? email : throw new CustomSystemException(Constants.ErrorCodes.InvalidEmail, "invalid email address");
+            BankAccountNumber = ValidateBankAccount(bankAccountNumber) ? bankAccountNumber : throw new CustomSystemException(Constants.ErrorCodes.InvalidBankAccount, "Invalid Bank Account Number");
         }
 
         public Customer(int id, string firstname, string lastname, DateTime dateOfBirth, string phoneNumber, string email, string bankAccountNumber) : this(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber)
@@ -63,8 +66,9 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
 
         private bool ValidateBankAccount(string bankAccount)
         {
-            var test = Regex.IsMatch(bankAccount, "((\\d{4})-){3}\\d{4}");
-            return test;
+            IIbanValidator validator = new IbanValidator();
+            ValidationResult validationResult = validator.Validate(bankAccount);
+            return validationResult.IsValid;
         }
 
     }
