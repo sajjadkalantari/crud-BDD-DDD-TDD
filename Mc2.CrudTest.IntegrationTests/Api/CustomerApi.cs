@@ -30,13 +30,25 @@ namespace Mc2.CrudTest.IntegrationTests.Api
             var response =  await _client.PostAsync<CustomerDTO>(request);
             return response;
         }
+        
+        public async Task<CustomerDTO> UpdateCustomerAsync(UpdateCustomerCommand model)
+        {
+            var request = new RestRequest($"{_baseUrl}/{model.Id}").AddBody(model);
+            var response =  await _client.PutAsync<CustomerDTO>(request);
+            return response;
+        }
 
         public async Task<List<CustomerDTO>> GetCustomersAsync()
         {
             var request = new RestRequest(_baseUrl);
-
             var response = await _client.GetAsync<List<CustomerDTO>>(request);
+            return response;
+        }
 
+        public async Task<int> DeleteCustomersAsync(int id)
+        {
+            var request = new RestRequest($"{_baseUrl}/{id}");
+            var response = await _client.DeleteAsync<int>(request);
             return response;
         }
     }

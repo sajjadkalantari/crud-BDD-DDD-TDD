@@ -51,18 +51,31 @@ namespace Mc2.CrudTest.IntegrationTests.StepDefinitions
         }
 
         [When(@"user edit customer with new email of ""([^""]*)""")]
-        public void WhenUserEditCustomerWithNewEmailOf(string p0)
+        public async Task WhenUserEditCustomerWithNewEmailOf(string p0)
         {
-            var custopmer = (CustomerDTO)_scenarioContext["customer"];
+            var customer = (CustomerDTO)_scenarioContext["customer"];
 
-            throw new PendingStepException();
+            var updateCommand = new UpdateCustomerCommand
+            {
+                Id = customer.Id,
+                BankAccountNumber = customer.BankAccountNumber,
+                Email = p0,
+                Firstname = customer.Firstname,
+                Lastname = customer.Lastname,
+                DateOfBirth = customer.DateOfBirth,
+                PhoneNumber = customer.PhoneNumber
+            };
+
+            _scenarioContext["customer"] = await _customerApi.UpdateCustomerAsync(updateCommand);
         }
 
 
         [When(@"user delete customer by Email of ""([^""]*)""")]
-        public void WhenUserDeleteCustomerByEmailOf(string p0)
+        public async Task WhenUserDeleteCustomerByEmailOf(string p0)
         {
-            throw new PendingStepException();
+            var customers = await _customerApi.GetCustomersAsync();
+            var customer = customers.Where(x => x.Email == p0).First();
+            await _customerApi.DeleteCustomersAsync(customer.Id);
         }
     }
 }
