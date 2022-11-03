@@ -1,6 +1,9 @@
 ﻿using Mc2.CrudTest.Presentation.Application.Dtos;
 using Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate;
+using Mc2.CrudTest.Shared;
+using Mc2.CrudTest.Shared.Exceptions;
 using MediatR;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,13 +43,25 @@ namespace Mc2.CrudTest.Presentation.Application.Commands
 
         public async Task<CustomerDTO> Handle(CreateCustomerCommand message, CancellationToken cancellationToken)
         {
-            var customer = CreateCustomerCommand.ToCustomer(message);
-            
-            var customerEntity = _customerRepository.Add(customer);
+            try
+            {
+                var customer = CreateCustomerCommand.ToCustomer(message);
 
-            await _customerRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+                var customerEntity = _customerRepository.Add(customer);
 
-            return CustomerDTO.FromCustomer(customerEntity);
+                await _customerRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+
+                return CustomerDTO.FromCustomer(customerEntity);
+            }
+            catch (Exception ex) when (ex.InnerException is SqlException sqlException && (sqlException.Number == 2627 || sqlException.Number == 2601))
+            {
+                if (ex.InnerException.Message.Contains(nameof(Customer.Email)))
+                    throw new CustomSystemException(Constants.ErrorCodes.DuplicateCustomerByEmail, "Duplicate Customer by Email address");
+                if (ex.InnerException.Message.Contains(nameof(Customer.Firstname)))
+                    throw new CustomSystemException(Constants.ErrorCodes.DuplicateCustomerByNameAndBirthdate, "Duplicate customer by first-name, last-name,Date-of-birth");
+                else throw ex;
+            }
+
         }
     }
 }

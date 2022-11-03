@@ -52,8 +52,4 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="StepDefinitions\" />
-  </ItemGroup>
-
 </Project>
