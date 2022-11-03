@@ -1,5 +1,6 @@
 using Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate;
 using Mc2.CrudTest.Presentation.Domain.Events;
+using Mc2.CrudTest.Shared.Exceptions;
 using System;
 using Xunit;
 
@@ -16,7 +17,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Domain
             var dateOfBirth = DateTime.UtcNow;
             var phoneNumber = "+44 117 496 0123";
             var email = "test@test.com";
-            var bankAccountNumber = "0000-0000-0000-0000";
+            var bankAccountNumber = "NL91ABNA0417164300";
 
             //Act 
             var fakeCustomer = new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber);
@@ -32,12 +33,12 @@ namespace Mc2.CrudTest.AcceptanceTests.Domain
             var firstname = "fakeFirstName";
             var lastname = "fakeLastname";
             var dateOfBirth = DateTime.UtcNow;
-            var phoneNumber = "117 496 0123";
+            var phoneNumber = "+9891212";
             var email = "test@test.com";
-            var bankAccountNumber = "0000-0000-0000-0000";
+            var bankAccountNumber = "NL91ABNA0417164300";
 
             //Act - Assert
-            Assert.Throws<ArgumentException>(() => new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber));
+            Assert.Throws<CustomSystemException>(() => new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber));
         }
 
         [Fact]
@@ -49,10 +50,10 @@ namespace Mc2.CrudTest.AcceptanceTests.Domain
             var dateOfBirth = DateTime.UtcNow;
             var phoneNumber = "+44 117 496 0123";
             var email = "test@";
-            var bankAccountNumber = "0000-0000-0000-0000";
+            var bankAccountNumber = "NL91ABNA0417164300";
 
             //Act - Assert
-            Assert.Throws<ArgumentException>(() => new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber));
+            Assert.Throws<CustomSystemException>(() => new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber));
         }
 
         [Fact]
@@ -67,7 +68,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Domain
             var bankAccountNumber = "00000000";
 
             //Act - Assert
-            Assert.Throws<ArgumentException>(() => new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber));
+            Assert.Throws<CustomSystemException>(() => new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber));
         }
 
         [Fact]
@@ -79,7 +80,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Domain
             var dateOfBirth = DateTime.UtcNow;
             var phoneNumber = "+44 117 496 0123";
             var email = "test@test.com";
-            var bankAccountNumber = "0000-0000-0000-0000";
+            var bankAccountNumber = "NL91ABNA0417164300";
 
             //Act - Assert
             Assert.Throws<ArgumentNullException>(() => new Customer(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber));
@@ -95,7 +96,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Domain
             var dateOfBirth = DateTime.UtcNow;
             var phoneNumber = "+44 117 496 0123";
             var email = "test@test.com";
-            var bankAccountNumber = "0000-0000-0000-0000";
+            var bankAccountNumber = "NL91ABNA0417164300";
             var expectedResult = 1;
 
             //Act 
@@ -114,7 +115,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Domain
             var dateOfBirth = DateTime.UtcNow;
             var phoneNumber = "+44 117 496 0123";
             var email = "test@test.com";
-            var bankAccountNumber = "0000-0000-0000-0000";
+            var bankAccountNumber = "NL91ABNA0417164300";
             var expectedResult = 0;
 
             //Act 
