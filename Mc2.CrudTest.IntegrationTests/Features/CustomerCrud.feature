@@ -13,7 +13,7 @@ Background:
 Scenario: Create Read Edit Delete Customer
 	When user creates a customer with following data
 		| ID | Firstname | Lastname | Email        | Phonenumber   | DateOfBirth | BankAccountNumber          |
-		| 1  | John      | Doe      | john@doe.com | +989121234567 | 01-JAN-2000 | IR480170000000227662719000 |
+		| 1  | John      | Doe      | john@doe.com | +989121234567 | 01-JAN-2000 | NL91ABNA0417164300		  |
 	Then user can lookup all customers and filter by email of "john@doe.com" and get "1" records
 	When user edit customer with new email of "new@gmail.com"
 	Then user can lookup all customers and filter by email of "john@doe.com" and get "0" records
