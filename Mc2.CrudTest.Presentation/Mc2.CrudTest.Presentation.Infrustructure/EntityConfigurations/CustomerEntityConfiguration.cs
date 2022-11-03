@@ -18,7 +18,7 @@ namespace Mc2.CrudTest.Presentation.Infrustructure.EntityConfigurations
             builder.Property(m => m.Firstname).HasMaxLength(200).IsRequired();
             builder.Property(m => m.Lastname).HasMaxLength(200).IsRequired();
             builder.Property(m => m.DateOfBirth).IsRequired();
-            builder.Property(b => b.PhoneNumber).HasMaxLength(15).IsUnicode(false).IsRequired();
+            builder.Property(b => b.PhoneNumber).IsRequired();
             builder.Property(b => b.Email).HasMaxLength(200).IsRequired();
             builder.Property(b => b.BankAccountNumber).HasMaxLength(200).IsRequired();
             builder.Ignore(b => b.DomainEvents);

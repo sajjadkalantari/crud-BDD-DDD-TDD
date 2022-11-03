@@ -16,7 +16,7 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string PhoneNumber { get; set; }
+        public ulong PhoneNumber { get; set; }
         public string Email { get; set; }
         public string BankAccountNumber { get; set; }
 
@@ -25,15 +25,15 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
             Firstname = !string.IsNullOrEmpty(firstname) ? firstname : throw new ArgumentNullException(nameof(firstname));
             Lastname = !string.IsNullOrEmpty(lastname) ? lastname : throw new ArgumentNullException(nameof(lastname));
             DateOfBirth = dateOfBirth;
-            PhoneNumber = ValidatePhonenumber(phoneNumber) ? phoneNumber : throw new CustomSystemException(Constants.ErrorCodes.InvalidMobileNumber, "invalid mobile number");
+            PhoneNumber = ValidatePhonenumber(phoneNumber) ? ParsePhoneNumber(phoneNumber) : throw new CustomSystemException(Constants.ErrorCodes.InvalidMobileNumber, "invalid mobile number");
             Email = ValidateEmail(email) ? email : throw new CustomSystemException(Constants.ErrorCodes.InvalidEmail, "invalid email address");
             BankAccountNumber = ValidateBankAccount(bankAccountNumber) ? bankAccountNumber : throw new CustomSystemException(Constants.ErrorCodes.InvalidBankAccount, "Invalid Bank Account Number");
         }
-
         public Customer(int id, string firstname, string lastname, DateTime dateOfBirth, string phoneNumber, string email, string bankAccountNumber) : this(firstname, lastname, dateOfBirth, phoneNumber, email, bankAccountNumber)
         {
-            Id = id;            
+            Id = id;
         }
+        private Customer() { }
 
         private bool ValidatePhonenumber(string phonenumber)
         {
@@ -41,7 +41,7 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
             {
                 if (string.IsNullOrEmpty(phonenumber)) return false;
                 var phoneNumberUtil = PhoneNumbers.PhoneNumberUtil.GetInstance();
-                var phonenumberInstance = phoneNumberUtil.Parse(phonenumber, null);
+                var phonenumberInstance = phoneNumberUtil.Parse(phonenumber, "IR");
                 return phoneNumberUtil.IsValidNumber(phonenumberInstance);
             }
             catch (Exception)
@@ -49,6 +49,13 @@ namespace Mc2.CrudTest.Presentation.Domain.AggregatesModel.CustomerAggregate
                 return false;
             }
 
+        }
+
+        private ulong ParsePhoneNumber(string phonenumber)
+        {
+            var phoneNumberUtil = PhoneNumbers.PhoneNumberUtil.GetInstance();
+            var phonenumberInstance = phoneNumberUtil.Parse(phonenumber, "IR");
+            return phonenumberInstance.NationalNumber;
         }
 
         private bool ValidateEmail(string email)

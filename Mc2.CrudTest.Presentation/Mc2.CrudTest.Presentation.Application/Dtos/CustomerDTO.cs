@@ -25,7 +25,7 @@ namespace Mc2.CrudTest.Presentation.Application.Dtos
                 Firstname = customer.Firstname,
                 Lastname = customer.Lastname,
                 DateOfBirth = customer.DateOfBirth,
-                PhoneNumber = customer.PhoneNumber,
+                PhoneNumber = customer.PhoneNumber.ToString(),
                 Email = customer.Email,
                 BankAccountNumber = customer.BankAccountNumber,
             };
