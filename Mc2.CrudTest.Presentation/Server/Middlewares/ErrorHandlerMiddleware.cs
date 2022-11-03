@@ -1,4 +1,5 @@
-﻿using Mc2.CrudTest.Presentation.Infrustructure.Exceptions;
+﻿using Mc2.CrudTest.Presentation.Application.Dtos;
+using Mc2.CrudTest.Shared.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -34,17 +35,22 @@ namespace Mc2.CrudTest.Presentation.Server.Middlewares
 #if DEBUG
                 error = error.InnerException ?? error; // just in debug mode
 #endif
-                var responseModel = new { succeeded = false, error = error?.Message};
+                var responseModel = new ResponseDTO { Succeeded = false, Description = error?.Message };
 
                 switch (error)
                 {
+                    case CustomSystemException e:
+                        // custom system error
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        responseModel.Code = e.Code;
+                        break;
                     case ApiException:
                         // custom application error
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
                     case InvalidRequestBodyException e:
                         // validation error
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;                        
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
                     case EntityNotFoundException:
                         // validation error
