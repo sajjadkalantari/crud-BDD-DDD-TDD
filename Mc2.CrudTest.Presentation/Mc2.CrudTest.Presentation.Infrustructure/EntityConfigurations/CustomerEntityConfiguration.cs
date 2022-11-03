@@ -43,7 +43,6 @@ namespace Mc2.CrudTest.Presentation.Infrustructure.EntityConfigurations
 
             builder.Ignore(b => b.DomainEvents);
             builder.HasIndex(b => new { b.DateOfBirth, b.Firstname, b.Lastname }).IsUnique(true);
-            //builder.HasIndex(b => b.Email).IsUnique(true);
         }
     }
 }
