@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Mc2.CrudTest.Presentation.Infrustructure.Exceptions
+namespace Mc2.CrudTest.Shared.Exceptions
 {
     public class DuplicateEntityException : Exception
     {
