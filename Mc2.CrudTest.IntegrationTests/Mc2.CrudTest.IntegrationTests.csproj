@@ -7,11 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <None Update="xunit.runner.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Compile Remove="CustomerScenarioBase.cs" />
+    <Compile Remove="CustomerScenarios.cs" />
+    <Compile Remove="CustomerTestsStartup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="testappsettings.json" />
+    <None Remove="xunit.runner.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <None Update="Features\Calculator.feature">
+	    <Visible>$(UsingMicrosoftNETSdk)</Visible>
+	    <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
 	  </None>
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.17" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="RestSharp" Version="108.0.2" />
+    <PackageReference Include="SpecFlow.xUnit" Version="3.9.74" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,6 +41,15 @@
     <ProjectReference Include="..\Mc2.CrudTest.Presentation\Mc2.CrudTest.Presentation.Application\Mc2.CrudTest.Presentation.Application.csproj" />
     <ProjectReference Include="..\Mc2.CrudTest.Presentation\Mc2.CrudTest.Presentation.Infrustructure\Mc2.CrudTest.Presentation.Infrustructure.csproj" />
     <ProjectReference Include="..\Mc2.CrudTest.Presentation\Server\Mc2.CrudTest.Presentation.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Features\CustomerCrud.feature.cs">
+      <Visible>true</Visible>
+      <DependentUpon>CustomerCrud.feature</DependentUpon>
+      <DesignTime>true</DesignTime>
+      <AutoGen>true</AutoGen>
+    </Compile>
   </ItemGroup>
 
 </Project>

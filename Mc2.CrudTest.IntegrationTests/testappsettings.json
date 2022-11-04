@@ -1,5 +1,0 @@
-﻿{
-  "SqlDbConfig": {
-    "ConnectionString": "Data Source=.;Initial Catalog=CustomerDb;Integrated Security=True;"
-  }
-}

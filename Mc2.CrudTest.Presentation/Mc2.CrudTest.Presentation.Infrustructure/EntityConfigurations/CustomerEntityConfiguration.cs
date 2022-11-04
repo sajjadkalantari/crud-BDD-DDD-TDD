@@ -18,12 +18,31 @@ namespace Mc2.CrudTest.Presentation.Infrustructure.EntityConfigurations
             builder.Property(m => m.Firstname).HasMaxLength(200).IsRequired();
             builder.Property(m => m.Lastname).HasMaxLength(200).IsRequired();
             builder.Property(m => m.DateOfBirth).IsRequired();
-            builder.Property(b => b.PhoneNumber).HasMaxLength(15).IsUnicode(false).IsRequired();
-            builder.Property(b => b.Email).HasMaxLength(200).IsRequired();
-            builder.Property(b => b.BankAccountNumber).HasMaxLength(200).IsRequired();
+
+            builder
+                .OwnsOne(o => o.PhoneNumber, a =>
+                {
+                    a.Property(b => b.PhoneNumber).IsRequired().HasColumnName(nameof(PhoneNumberValueObject.PhoneNumber));
+                    a.WithOwner();
+                });
+
+            builder
+               .OwnsOne(o => o.Email, a =>
+               {
+                   a.Property(b => b.Email).HasMaxLength(200).IsRequired().HasColumnName(nameof(EmailValueObject.Email));
+                   a.WithOwner();
+                   a.HasIndex(b => b.Email).IsUnique(true);
+               });
+
+            builder
+             .OwnsOne(o => o.BankAccountNumber, a =>
+             {
+                 a.Property(b => b.BankAccountNumber).HasMaxLength(200).IsRequired().HasColumnName(nameof(BankAccountNumberValueObject.BankAccountNumber));
+                 a.WithOwner();
+             });
+
             builder.Ignore(b => b.DomainEvents);
             builder.HasIndex(b => new { b.DateOfBirth, b.Firstname, b.Lastname }).IsUnique(true);
-            builder.HasIndex(b => b.Email).IsUnique(true);
         }
     }
 }

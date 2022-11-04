@@ -34,9 +34,9 @@ namespace Mc2.CrudTest.AcceptanceTests.Application
                 Firstname = "fakeFirstName",
                 Lastname = "fakeLastname",
                 DateOfBirth = DateTime.UtcNow,
-                PhoneNumber = "+44 117 496 0123",
+                PhoneNumber = "+989121234567",
                 Email = "test@test.com",
-                BankAccountNumber = "0000-0000-0000-0000",
+                BankAccountNumber = "NL91ABNA0417164300",
             };
 
             var customerDto = CustomerDTO.FromCustomer(CreateCustomerCommand.ToCustomer(customerCommand));

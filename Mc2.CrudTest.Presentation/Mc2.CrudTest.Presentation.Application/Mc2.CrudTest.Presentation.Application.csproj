@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Mc2.CrudTest.Presentation.Domain\Mc2.CrudTest.Presentation.Domain.csproj" />
     <ProjectReference Include="..\Mc2.CrudTest.Presentation.Infrustructure\Mc2.CrudTest.Presentation.Infrustructure.csproj" />
+    <ProjectReference Include="..\Shared\Mc2.CrudTest.Shared.csproj" />
   </ItemGroup>
 
 </Project>

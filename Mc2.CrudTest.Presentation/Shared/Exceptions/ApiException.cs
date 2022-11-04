@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System;
-namespace Mc2.CrudTest.Presentation.Infrustructure.Exceptions
+using System.Net;
+
+namespace Mc2.CrudTest.Shared.Exceptions
 {
     public class ApiException : Exception
     {
